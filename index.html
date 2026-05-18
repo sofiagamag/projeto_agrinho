@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Agro Forte - Futuro Sustentável</title>
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================== */
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* =========================
+           PALETA DE CORES
+        ========================== */
+        :root{
+
+            /* Pantone 7740 C */
+            --verde: #3D5A2A;
+
+            /* Verde escuro */
+            --verde-escuro: #24361A;
+
+            /* Pantone 110 C */
+            --dourado: #D9A404;
+
+            /* Pantone 732 C */
+            --marrom: #6B3E26;
+
+            /* Pantone 2411 C */
+            --roxo: #5F4B8B;
+
+            --branco: #ffffff;
+            --cinza: #f4f4f4;
+        }
+
+        /* =========================
+           BODY
+        ========================== */
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: var(--cinza);
+            color: #222;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           CABEÇALHO
+        ========================== */
+        .header{
+            background-color: var(--verde-escuro);
+            color: white;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 20px 50px;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header h1{
+            color: var(--dourado);
+        }
+
+        /* =========================
+           MENU
+        ========================== */
+        .menu{
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .menu a{
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        .menu a:hover{
+            color: var(--dourado);
+        }
+
+        /* =========================
+           BANNER
+        ========================== */
+        .banner{
+
+            height: 90vh;
+
+            background:
+            linear-gradient(rgba(0,0,0,0.5),
+            rgba(0,0,0,0.5)),
+
+            url("https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1400");
+
+            background-size: cover;
+            background-position: center;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+            color: white;
+        }
+
+        .banner-texto{
+            max-width: 700px;
+            padding: 20px;
+        }
+
+        .banner h2{
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .banner p{
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        /* =========================
+           BOTÕES
+        ========================== */
+        button{
+
+            background-color: var(--dourado);
+            color: black;
+
+            border: none;
+
+            padding: 14px 28px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 1rem;
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        button:hover{
+            background-color: var(--roxo);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* =========================
+           SEÇÕES
+        ========================== */
+        .secao{
+            padding: 80px 10%;
+        }
+
+        .secao h2{
+            color: var(--verde);
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .destaque{
+            background-color: white;
+        }
+
+        /* =========================
+           CARDS
+        ========================== */
+        .cards{
+
+            display: flex;
+            gap: 20px;
+
+            flex-wrap: wrap;
+
+            margin-top: 30px;
+        }
+
+        .card{
+
+            background-color: white;
+
+            flex: 1;
+            min-width: 250px;
+
+            padding: 25px;
+
+            border-radius: 10px;
+
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+
+            transition: 0.3s;
+        }
+
+        .card:hover{
+            transform: translateY(-8px);
+        }
+
+        .card h3{
+            color: var(--marrom);
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+           LISTA
+        ========================== */
+        ul{
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+
+        /* =========================
+           FORMULÁRIO
+        ========================== */
+        form{
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+
+            margin-top: 30px;
+        }
+
+        input,
+        textarea{
+
+            padding: 12px;
+
+            border-radius: 6px;
+            border: 1px solid #ccc;
+
+            font-size: 1rem;
+        }
+
+        textarea{
+            resize: none;
+            height: 120px;
+        }
+
+        /* =========================
+           RODAPÉ
+        ========================== */
+        .footer{
+
+            background-color: var(--verde-escuro);
+
+            color: white;
+
+            text-align: center;
+
+            padding: 20px;
+        }
+
+        /* =========================
+           MODAL
+        ========================== */
+        .modal{
+
+            display: none;
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background-color: rgba(0,0,0,0.7);
+
+            justify-content: center;
+            align-items: center;
+
+            z-index: 2000;
+        }
+
+        .modal-conteudo{
+
+            background-color: white;
+
+            width: 80%;
+            max-width: 700px;
+
+            padding: 30px;
+
+            border-radius: 10px;
+
+            position: relative;
+
+            animation: aparecer 0.4s ease;
+        }
+
+        /* Animação */
+        @keyframes aparecer{
+
+            from{
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to{
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-conteudo h2{
+            color: var(--verde);
+            margin-bottom: 20px;
+        }
+
+        .modal-conteudo h3{
+            margin-top: 20px;
+            color: var(--marrom);
+        }
+
+        .modal-conteudo ul{
+            margin-top: 15px;
+        }
+
+        /* BOTÃO FECHAR */
+        #fechar{
+
+            position: absolute;
+
+            top: 10px;
+            right: 20px;
+
+            font-size: 30px;
+
+            cursor: pointer;
+        }
+
+        /* =========================
+           RESPONSIVIDADE
+        ========================== */
+        @media(max-width: 768px){
+
+            .header{
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .menu{
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .banner h2{
+                font-size: 2rem;
+            }
+
+            .cards{
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         CABEÇALHO
+    ========================== -->
+    <header class="header">
+
+        <h1>🌱 Agro Forte</h1>
+
+        <nav>
+            <ul class="menu">
+
+                <li><a href="#producao">Produção</a></li>
+
+                <li><a href="#sustentabilidade">Sustentabilidade</a></li>
+
+                <li><a href="#desafios">Desafios</a></li>
+
+                <li><a href="#futuro">Futuro</a></li>
+
+                <li><a href="#contato">Contato</a></li>
+
+            </ul>
+        </nav>
+
+    </header>
+
+    <!-- =========================
+         BANNER
+    ========================== -->
+    <section class="banner">
+
+        <div class="banner-texto">
+
+            <h2>
+                Agro forte, futuro sustentável
+            </h2>
+
+            <p>
+                Tecnologia, inovação e preservação ambiental
+                caminhando juntas para um futuro melhor.
+            </p>
+
+            <!-- BOTÃO INTERATIVO -->
+            <button id="btnSaibaMais">
+                Saiba Mais
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- =========================
+         PRODUÇÃO AGRÍCOLA
+    ========================== -->
+    <section id="producao" class="secao">
+
+        <h2>🌾 Produção Agrícola</h2>
+
+        <p>
+            O agronegócio é um dos pilares da economia brasileira,
+            responsável por exportações, empregos e abastecimento alimentar.
+        </p>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h3>Agricultura de Precisão</h3>
+
+                <p>
+                    Uso de GPS, sensores e dados digitais
+                    para reduzir desperdícios.
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Drones Agrícolas</h3>
+
+                <p>
+                    Monitoramento inteligente das plantações
+                    e análise do solo.
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Irrigação Inteligente</h3>
+
+                <p>
+                    Economia de água através de sistemas automatizados.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =========================
+         SUSTENTABILIDADE
+    ========================== -->
+    <section id="sustentabilidade" class="secao destaque">
+
+        <h2>♻️ Sustentabilidade no Campo</h2>
+
+        <p>
+            A sustentabilidade garante equilíbrio entre
+            produção agrícola e preservação ambiental.
+        </p>
+
+        <ul>
+
+            <li>Conservação do solo</li>
+
+            <li>Redução do desperdício de água</li>
+
+            <li>Uso de energias renováveis</li>
+
+            <li>Menor emissão de carbono</li>
+
+        </ul>
+
+    </section>
+
+    <!-- =========================
+         DESAFIOS
+    ========================== -->
+    <section id="desafios" class="secao">
+
+        <h2>⚠️ Desafios Ambientais</h2>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h3>Desmatamento</h3>
+
+                <p>
+                    Pode causar perda da biodiversidade
+                    e alterações climáticas.
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Uso excessivo da água</h3>
+
+                <p>
+                    Impacta rios, aquíferos e recursos naturais.
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Emissão de carbono</h3>
+
+                <p>
+                    Máquinas e queimadas contribuem para
+                    o aquecimento global.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =========================
+         FUTURO
+    ========================== -->
+    <section id="futuro" class="secao destaque">
+
+        <h2>🚜 Soluções e Futuro</h2>
+
+        <p>
+            A agricultura regenerativa e as novas tecnologias
+            podem transformar o futuro do agronegócio.
+        </p>
+
+        <button>
+            Conhecer Inovações
+        </button>
+
+    </section>
+
+    <!-- =========================
+         CONTATO
+    ========================== -->
+    <section id="contato" class="secao">
+
+        <h2>📩 Conscientização</h2>
+
+        <p>
+            Pequenas ações no presente ajudam a construir
+            um futuro sustentável.
+        </p>
+
+        <form>
+
+            <input type="text" placeholder="Seu nome">
+
+            <input type="email" placeholder="Seu e-mail">
+
+            <textarea placeholder="Digite sua mensagem"></textarea>
+
+            <button type="submit">
+                Enviar
+            </button>
+
+        </form>
+
+    </section>
+
+    <!-- =========================
+         RODAPÉ
+    ========================== -->
+    <footer class="footer">
+
+        <p>
+            © 2026 - Agro Forte | Educação e Sustentabilidade
+        </p>
+
+    </footer>
+
+    <!-- =========================
+         MODAL INTERATIVO
+    ========================== -->
+    <div id="modal" class="modal">
+
+        <div class="modal-conteudo">
+
+            <!-- FECHAR -->
+            <span id="fechar">&times;</span>
+
+            <h2>
+                Impactos do Agronegócio Brasileiro
+            </h2>
+
+            <ul>
+
+                <li>
+                    O agronegócio representa grande parcela do PIB brasileiro.
+                </li>
+
+                <li>
+                    O uso de tecnologia aumenta a produtividade no campo.
+                </li>
+
+                <li>
+                    A irrigação inteligente reduz desperdícios de água.
+                </li>
+
+                <li>
+                    Drones auxiliam no monitoramento sustentável.
+                </li>
+
+                <li>
+                    O desmatamento ainda é um desafio ambiental importante.
+                </li>
+
+                <li>
+                    Energias renováveis ajudam na redução de carbono.
+                </li>
+
+                <li>
+                    A agricultura regenerativa surge como solução futura.
+                </li>
+
+            </ul>
+
+            <h3>Fontes confiáveis:</h3>
+
+            <p>
+                EMBRAPA, Ministério da Agricultura, FAO e IPCC 2024.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+    <script>
+
+        // BOTÃO
+        const botao = document.getElementById("btnSaibaMais");
+
+        // MODAL
+        const modal = document.getElementById("modal");
+
+        // FECHAR
+        const fechar = document.getElementById("fechar");
+
+        // ABRIR MODAL
+        botao.addEventListener("click", () => {
+
+            modal.style.display = "flex";
+
+        });
+
+        // FECHAR MODAL
+        fechar.addEventListener("click", () => {
+
+            modal.style.display = "none";
+
+        });
+
+        // FECHAR AO CLICAR FORA
+        window.addEventListener("click", (event) => {
+
+            if(event.target === modal){
+
+                modal.style.display = "none";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
