@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agrinho Tech - O Futuro do Agronegócio Sustentável</title>
+    <title>Agrinho Tech 2026 - O Futuro do Agronegócio Sustentável</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Leaflet CSS para o mapa -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         :root {
             --primary-green: #1b4332;
@@ -43,7 +45,7 @@
             font-family: 'Playfair Display', serif;
         }
 
-        /* HEADER & NAVEGAÇÃO */
+        /* HEADER */
         header {
             position: fixed;
             top: 0;
@@ -88,7 +90,7 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2.5rem;
+            gap: 2rem;
         }
 
         .nav-links a {
@@ -135,7 +137,7 @@
             border-radius: 3px;
         }
 
-        /* HERO SECTION */
+        /* HERO */
         .hero {
             min-height: 100vh;
             background: linear-gradient(135deg, rgba(27, 67, 50, 0.9), rgba(8, 28, 21, 0.8)),
@@ -263,7 +265,7 @@
             color: var(--accent-gold);
         }
 
-        /* SEÇÕES GERAIS */
+        /* SEÇÕES */
         section {
             padding: 6rem 2rem;
             max-width: 1400px;
@@ -292,8 +294,6 @@
             font-size: 3rem;
             color: var(--primary-green);
             margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
         }
 
         .section-title::after {
@@ -313,10 +313,9 @@
             margin: 0 auto;
         }
 
-        /* PRODUÇÃO AGRÍCOLA */
+        /* PRODUÇÃO */
         .production-section {
             background: var(--cream);
-            position: relative;
         }
 
         .stats-container {
@@ -528,7 +527,7 @@
             color: var(--accent-gold);
         }
 
-        /* DESAFIOS AMBIENTAIS */
+        /* DESAFIOS */
         .challenges-section {
             background: var(--light);
         }
@@ -600,7 +599,7 @@
             background: linear-gradient(to right, #f4a261, #e63946);
         }
 
-        /* SOLUÇÕES E FUTURO */
+        /* SOLUÇÕES */
         .solutions-section {
             background: linear-gradient(to bottom, var(--cream), white);
         }
@@ -681,7 +680,7 @@
             color: var(--cream);
         }
 
-        /* CALCULADORA DE IMPACTO */
+        /* CALCULADORA */
         .calculator-section {
             background: var(--primary-green);
             color: var(--cream);
@@ -813,7 +812,7 @@
             transition: width 0.3s ease;
         }
 
-        /* GALERIA INTERATIVA */
+        /* GALERIA */
         .gallery-section {
             background: white;
         }
@@ -865,32 +864,143 @@
             margin-bottom: 0.5rem;
         }
 
-        /* MAPA AGRÍCOLA */
+        /* MAPA AGRÍCOLA - AGORA FUNCIONAL */
         .map-section {
             background: var(--dark);
             color: var(--cream);
             padding: 5rem 2rem;
         }
 
-        .map-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: var(--primary-green);
-            padding: 2rem;
-            border-radius: 20px;
-            text-align: center;
+        .map-section .section-title {
+            color: var(--cream);
         }
 
-        .map-placeholder {
-            background: rgba(255, 255, 255, 0.1);
-            height: 400px;
-            border-radius: 15px;
+        .map-section .section-subtitle {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .map-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .map-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .filter-btn {
+            padding: 0.7rem 1.5rem;
+            border: 2px solid var(--accent-gold);
+            background: transparent;
+            color: var(--cream);
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
+            gap: 0.5rem;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--accent-gold);
+            color: var(--dark);
+        }
+
+        .filter-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        #map {
+            height: 550px;
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .map-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
             margin-top: 2rem;
-            border: 2px dashed var(--accent-gold);
+        }
+
+        .map-info-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--accent-gold);
+        }
+
+        .map-info-card h4 {
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .map-info-card p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Customização dos popups do mapa */
+        .leaflet-popup-content-wrapper {
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .leaflet-popup-content {
+            margin: 1rem 1.2rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .popup-content h3 {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .popup-content .popup-type {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: white;
+        }
+
+        .popup-content p {
+            color: #555;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+
+        .popup-content .popup-stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.3rem 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.85rem;
+        }
+
+        .popup-content .popup-stat:last-child {
+            border-bottom: none;
+        }
+
+        .popup-content .popup-stat strong {
+            color: var(--primary-green);
         }
 
         /* CONTATO */
@@ -1037,14 +1147,8 @@
 
         /* ANIMAÇÕES */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeIn {
@@ -1058,15 +1162,9 @@
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-20px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-10px);
-            }
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-20px); }
+            60% { transform: translateX(-50%) translateY(-10px); }
         }
 
         .fade-in {
@@ -1082,9 +1180,7 @@
 
         /* RESPONSIVO */
         @media (max-width: 968px) {
-            .menu-toggle {
-                display: flex;
-            }
+            .menu-toggle { display: flex; }
 
             .nav-links {
                 position: fixed;
@@ -1098,55 +1194,30 @@
                 box-shadow: 0 10px 30px var(--shadow-lg);
             }
 
-            .nav-links.active {
-                right: 0;
-            }
+            .nav-links.active { right: 0; }
 
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
+            .hero h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
 
             .solutions-container,
             .contact-container {
                 grid-template-columns: 1fr;
             }
 
-            .solution-image {
-                order: -1;
-            }
-
-            .solution-badge {
-                left: 20px;
-                bottom: 20px;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
+            .solution-image { order: -1; }
+            .solution-badge { left: 20px; bottom: 20px; }
+            .form-row { grid-template-columns: 1fr; }
+            #map { height: 400px; }
         }
 
         @media (max-width: 600px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
             .stats-container,
             .tech-grid,
-            .sustainability-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
+            .sustainability-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 1.8rem; }
+            #map { height: 350px; }
         }
 
         /* LIGHTBOX */
@@ -1163,9 +1234,7 @@
             justify-content: center;
         }
 
-        .lightbox.active {
-            display: flex;
-        }
+        .lightbox.active { display: flex; }
 
         .lightbox img {
             max-width: 90%;
@@ -1183,9 +1252,7 @@
             transition: color 0.3s ease;
         }
 
-        .lightbox-close:hover {
-            color: var(--accent-gold);
-        }
+        .lightbox-close:hover { color: var(--accent-gold); }
     </style>
 </head>
 <body>
@@ -1202,6 +1269,7 @@
                 <li><a href="#sustentabilidade">Sustentabilidade</a></li>
                 <li><a href="#desafios">Desafios</a></li>
                 <li><a href="#solucoes">Soluções</a></li>
+                <li><a href="#mapa">Mapa</a></li>
                 <li><a href="#calculadora">Calculadora</a></li>
                 <li><a href="#quiz">Quiz</a></li>
                 <li><a href="#contato">Contato</a></li>
@@ -1217,7 +1285,7 @@
     <!-- HERO -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <div class="hero-badge">🌱 Projeto Agrinho 2024</div>
+            <div class="hero-badge">🌱 Projeto Agrinho 2026</div>
             <h1>Cultivando o <span>Futuro</span> com Tecnologia e Sustentabilidade</h1>
             <p>Descubra como o agronegócio moderno une produtividade, inovação e preservação ambiental para construir um amanhã melhor</p>
             <div class="hero-buttons">
@@ -1225,9 +1293,9 @@
                     <i class="fas fa-seedling"></i>
                     Explorar Tecnologias
                 </a>
-                <a href="#calculadora" class="btn-secondary">
-                    <i class="fas fa-calculator"></i>
-                    Calcular Impacto
+                <a href="#mapa" class="btn-secondary">
+                    <i class="fas fa-map-marked-alt"></i>
+                    Ver Mapa Agrícola
                 </a>
             </div>
         </div>
@@ -1236,50 +1304,40 @@
         </div>
     </section>
 
-    <!-- PRODUÇÃO AGRÍCOLA -->
+    <!-- PRODUÇÃO -->
     <section class="production-section" id="producao">
         <div class="section-header fade-in">
             <span class="section-tag">Produção Agrícola</span>
             <h2 class="section-title">O Agronegócio que Alimenta o Mundo</h2>
-            <p class="section-subtitle">Tecnologia de ponta e dados impressionantes sobre a produção agrícola moderna</p>
+            <p class="section-subtitle">Tecnologia de ponta e dados impressionantes sobre a produção agrícola em 2026</p>
         </div>
 
         <div class="stats-container">
             <div class="stat-card fade-in">
-                <div class="stat-icon">
-                    <i class="fas fa-chart-line"></i>
-                </div>
+                <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
                 <div class="stat-number" data-target="28">0</div>
                 <div class="stat-label">% do PIB Brasileiro</div>
             </div>
             <div class="stat-card fade-in">
-                <div class="stat-icon">
-                    <i class="fas fa-globe-americas"></i>
-                </div>
+                <div class="stat-icon"><i class="fas fa-globe-americas"></i></div>
                 <div class="stat-number" data-target="1">0</div>
                 <div class="stat-label">º Maior Exportador Mundial</div>
             </div>
             <div class="stat-card fade-in">
-                <div class="stat-icon">
-                    <i class="fas fa-users"></i>
-                </div>
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
                 <div class="stat-number" data-target="18">0</div>
                 <div class="stat-label">Milhões de Empregos</div>
             </div>
             <div class="stat-card fade-in">
-                <div class="stat-icon">
-                    <i class="fas fa-tractor"></i>
-                </div>
+                <div class="stat-icon"><i class="fas fa-tractor"></i></div>
                 <div class="stat-number" data-target="65">0</div>
-                <div class="stat-label">Milhões de Hectares Cultivados</div>
+                <div class="stat-label">Milhões de Hectares</div>
             </div>
         </div>
 
         <div class="tech-grid">
             <div class="tech-card fade-in">
-                <div class="tech-image">
-                    <i class="fas fa-satellite-dish"></i>
-                </div>
+                <div class="tech-image"><i class="fas fa-satellite-dish"></i></div>
                 <div class="tech-content">
                     <h3>Agricultura de Precisão</h3>
                     <p>Uso de GPS, sensores e drones para otimizar cada metro quadrado da plantação, reduzindo desperdícios e aumentando a produtividade em até 30%.</p>
@@ -1316,9 +1374,7 @@
 
         <div class="sustainability-grid">
             <div class="sustain-card fade-in">
-                <div class="sustain-icon">
-                    <i class="fas fa-recycle"></i>
-                </div>
+                <div class="sustain-icon"><i class="fas fa-recycle"></i></div>
                 <h3>Conservação do Solo</h3>
                 <p>Técnicas de plantio direto, rotação de culturas e cobertura vegetal que mantêm a fertilidade e evitam a erosão.</p>
                 <ul class="sustain-list">
@@ -1329,9 +1385,7 @@
                 </ul>
             </div>
             <div class="sustain-card fade-in">
-                <div class="sustain-icon">
-                    <i class="fas fa-water"></i>
-                </div>
+                <div class="sustain-icon"><i class="fas fa-water"></i></div>
                 <h3>Gestão Hídrica</h3>
                 <p>Uso consciente da água através de tecnologias de monitoramento e sistemas de reuso que preservam os recursos hídricos.</p>
                 <ul class="sustain-list">
@@ -1342,9 +1396,7 @@
                 </ul>
             </div>
             <div class="sustain-card fade-in">
-                <div class="sustain-icon">
-                    <i class="fas fa-wind"></i>
-                </div>
+                <div class="sustain-icon"><i class="fas fa-wind"></i></div>
                 <h3>Energias Limpas</h3>
                 <p>Transição para fontes renováveis que reduzem a pegada de carbono e tornam as propriedades energeticamente independentes.</p>
                 <ul class="sustain-list">
@@ -1357,7 +1409,7 @@
         </div>
     </section>
 
-    <!-- DESAFIOS AMBIENTAIS -->
+    <!-- DESAFIOS -->
     <section class="challenges-section" id="desafios">
         <div class="section-header fade-in">
             <span class="section-tag">Desafios Ambientais</span>
@@ -1367,42 +1419,30 @@
 
         <div class="challenges-grid">
             <div class="challenge-card negative fade-in">
-                <div class="challenge-icon">
-                    <i class="fas fa-tree"></i>
-                </div>
+                <div class="challenge-icon"><i class="fas fa-tree"></i></div>
                 <h3>Desmatamento</h3>
                 <p>A conversão de áreas florestais em terras agrícolas ainda é um desafio, mas técnicas de intensificação sustentável estão revertendo esse cenário.</p>
-                <div class="impact-meter">
-                    <div class="impact-fill" style="width: 75%"></div>
-                </div>
+                <div class="impact-meter"><div class="impact-fill" style="width: 75%"></div></div>
                 <small style="color: #666; margin-top: 0.5rem; display: block;">Nível de Impacto: Alto</small>
             </div>
             <div class="challenge-card fade-in">
-                <div class="challenge-icon">
-                    <i class="fas fa-cloud"></i>
-                </div>
+                <div class="challenge-icon"><i class="fas fa-cloud"></i></div>
                 <h3>Emissão de Carbono</h3>
                 <p>O setor agrícola é responsável por parte das emissões de gases do efeito estufa, mas práticas de agricultura regenerativa estão capturando carbono no solo.</p>
-                <div class="impact-meter">
-                    <div class="impact-fill" style="width: 60%"></div>
-                </div>
+                <div class="impact-meter"><div class="impact-fill" style="width: 60%"></div></div>
                 <small style="color: #666; margin-top: 0.5rem; display: block;">Nível de Impacto: Médio</small>
             </div>
             <div class="challenge-card negative fade-in">
-                <div class="challenge-icon">
-                    <i class="fas fa-tint-slash"></i>
-                </div>
+                <div class="challenge-icon"><i class="fas fa-tint-slash"></i></div>
                 <h3>Uso da Água</h3>
                 <p>A agricultura consome cerca de 70% da água doce disponível. Tecnologias de irrigação precisa são essenciais para reduzir esse consumo.</p>
-                <div class="impact-meter">
-                    <div class="impact-fill" style="width: 85%"></div>
-                </div>
+                <div class="impact-meter"><div class="impact-fill" style="width: 85%"></div></div>
                 <small style="color: #666; margin-top: 0.5rem; display: block;">Nível de Impacto: Crítico</small>
             </div>
         </div>
     </section>
 
-    <!-- SOLUÇÕES E FUTURO -->
+    <!-- SOLUÇÕES -->
     <section class="solutions-section" id="solucoes">
         <div class="section-header fade-in">
             <span class="section-tag">Soluções e Futuro</span>
@@ -1456,7 +1496,53 @@
         </div>
     </section>
 
-    <!-- CALCULADORA DE IMPACTO -->
+    <!-- MAPA AGRÍCOLA FUNCIONAL -->
+    <section class="map-section" id="mapa">
+        <div class="section-header fade-in">
+            <span class="section-tag" style="background: var(--accent-gold); color: var(--dark);">Mapa Interativo</span>
+            <h2 class="section-title">Mapa Agrícola do Brasil 2026</h2>
+            <p class="section-subtitle">Explore as principais regiões produtoras do país em tempo real</p>
+        </div>
+
+        <div class="map-container fade-in">
+            <div class="map-filters">
+                <button class="filter-btn active" data-filter="all">
+                    <i class="fas fa-globe"></i> Todas as Culturas
+                </button>
+                <button class="filter-btn" data-filter="soja">
+                    <span class="filter-dot" style="background: #d4a373;"></span> Soja
+                </button>
+                <button class="filter-btn" data-filter="milho">
+                    <span class="filter-dot" style="background: #40916c;"></span> Milho
+                </button>
+                <button class="filter-btn" data-filter="cafe">
+                    <span class="filter-dot" style="background: #0077b6;"></span> Café
+                </button>
+                <button class="filter-btn" data-filter="cana">
+                    <span class="filter-dot" style="background: #bc6c25;"></span> Cana-de-açúcar
+                </button>
+            </div>
+
+            <div id="map"></div>
+
+            <div class="map-info">
+                <div class="map-info-card">
+                    <h4><i class="fas fa-info-circle"></i> Como Usar</h4>
+                    <p>Clique nos marcadores para ver detalhes de cada região produtora. Use os filtros acima para ver culturas específicas.</p>
+                </div>
+                <div class="map-info-card">
+                    <h4><i class="fas fa-chart-bar"></i> Dados 2026</h4>
+                    <p>Informações atualizadas sobre as principais culturas agrícolas brasileiras e suas regiões de produção.</p>
+                </div>
+                <div class="map-info-card">
+                    <h4><i class="fas fa-leaf"></i> Sustentabilidade</h4>
+                    <p>Muitas regiões já adotam práticas sustentáveis e agricultura de precisão.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALCULADORA -->
     <section class="calculator-section" id="calculadora">
         <div class="calculator-container fade-in">
             <h2><i class="fas fa-calculator"></i> Calculadora de Impacto Ambiental</h2>
@@ -1508,12 +1594,8 @@
                 <div class="quiz-progress-bar" id="quizProgress" style="width: 0%"></div>
             </div>
             <div id="quizContent">
-                <div class="quiz-question" id="quizQuestion">
-                    Carregando pergunta...
-                </div>
-                <div class="quiz-options" id="quizOptions">
-                    <!-- Opções serão inseridas via JavaScript -->
-                </div>
+                <div class="quiz-question" id="quizQuestion">Carregando pergunta...</div>
+                <div class="quiz-options" id="quizOptions"></div>
             </div>
             <div id="quizResult" style="display: none; text-align: center;">
                 <i class="fas fa-trophy" style="font-size: 4rem; color: var(--accent-gold); margin-bottom: 1rem;"></i>
@@ -1526,7 +1608,7 @@
         </div>
     </section>
 
-    <!-- GALERIA INTERATIVA -->
+    <!-- GALERIA -->
     <section class="gallery-section">
         <div class="section-header fade-in">
             <span class="section-tag">Galeria</span>
@@ -1575,43 +1657,6 @@
                 <div class="gallery-overlay">
                     <h4>Irrigação Inteligente</h4>
                     <p>Economia de água e precisão</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- MAPA AGRÍCOLA -->
-    <section class="map-section">
-        <div class="section-header fade-in">
-            <span class="section-tag" style="background: var(--accent-gold); color: var(--dark);">Mapa Interativo</span>
-            <h2 class="section-title" style="color: var(--cream);">Distribuição Agrícola</h2>
-            <p class="section-subtitle" style="color: rgba(255,255,255,0.8);">Principais regiões produtoras do Brasil</p>
-        </div>
-        
-        <div class="map-container fade-in">
-            <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem;">
-                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                    <div style="width: 20px; height: 20px; background: var(--accent-gold); border-radius: 5px;"></div>
-                    <span>Soja</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                    <div style="width: 20px; height: 20px; background: var(--light-green); border-radius: 5px;"></div>
-                    <span>Milho</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                    <div style="width: 20px; height: 20px; background: var(--tech-blue); border-radius: 5px;"></div>
-                    <span>Café</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                    <div style="width: 20px; height: 20px; background: var(--warm-gold); border-radius: 5px;"></div>
-                    <span>Cana</span>
-                </div>
-            </div>
-            <div class="map-placeholder">
-                <div>
-                    <i class="fas fa-map-marked-alt" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1rem; display: block;"></i>
-                    Mapa Interativo das Regiões Agrícolas<br>
-                    <small style="opacity: 0.7;">(Integração com API de mapas)</small>
                 </div>
             </div>
         </div>
@@ -1696,7 +1741,7 @@
                 <a href="#sustentabilidade">Sustentabilidade</a><br>
                 <a href="#desafios">Desafios Ambientais</a><br>
                 <a href="#solucoes">Soluções</a><br>
-                <a href="#calculadora">Calculadora</a>
+                <a href="#mapa">Mapa Agrícola</a>
             </div>
             <div class="footer-section">
                 <h4>Tecnologias</h4>
@@ -1718,7 +1763,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Agrinho Tech - Todos os direitos reservados | Desenvolvido com <i class="fas fa-heart" style="color: var(--accent-gold);"></i> para o futuro do agronegócio</p>
+            <p>&copy; 2026 Agrinho Tech - Todos os direitos reservados | Desenvolvido com <i class="fas fa-heart" style="color: var(--accent-gold);"></i> para o futuro do agronegócio</p>
         </div>
     </footer>
 
@@ -1727,6 +1772,9 @@
         <span class="lightbox-close">&times;</span>
         <img src="" alt="Imagem ampliada" id="lightboxImg">
     </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
         // Menu Mobile
@@ -1743,35 +1791,23 @@
             });
         });
 
-        // Header scroll effect
+        // Header scroll
         const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+            if (window.scrollY > 100) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
         });
 
-        // Animação de fade-in ao scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
+        // Fade-in animation
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
-        }, observerOptions);
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-        document.querySelectorAll('.fade-in').forEach(element => {
-            observer.observe(element);
-        });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-        // Animação dos números
+        // Contadores animados
         const animateCounter = (element, target) => {
             let current = 0;
             const increment = target / 50;
@@ -1799,7 +1835,245 @@
             statObserver.observe(stat);
         });
 
-        // Calculadora de Impacto
+        // ================================
+        // MAPA AGRÍCOLA FUNCIONAL
+        // ================================
+        const map = L.map('map').setView([-14.235, -51.9253], 4);
+
+        // Tile do OpenStreetMap com tema mais limpo
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | Agrinho Tech 2026',
+            maxZoom: 18
+        }).addTo(map);
+
+        // Dados das regiões agrícolas brasileiras
+        const regioesAgricolas = [
+            // SOJA (dourado)
+            {
+                lat: -12.5, lng: -55.5, tipo: 'soja',
+                nome: 'Mato Grosso',
+                cor: '#d4a373',
+                producao: '35 milhões de toneladas',
+                area: '10,5 milhões de hectares',
+                descricao: 'Maior produtor de soja do Brasil, líder mundial em produtividade.',
+                sustentavel: 'Alta adoção de plantio direto'
+            },
+            {
+                lat: -18.5, lng: -49.5, tipo: 'soja',
+                nome: 'Goiás',
+                cor: '#d4a373',
+                producao: '14 milhões de toneladas',
+                area: '3,5 milhões de hectares',
+                descricao: 'Segundo maior produtor, com forte tecnologia de precisão.',
+                sustentavel: 'Irrigação inteligente em expansão'
+            },
+            {
+                lat: -24.5, lng: -54.0, tipo: 'soja',
+                nome: 'Paraná',
+                cor: '#d4a373',
+                producao: '21 milhões de toneladas',
+                area: '5,8 milhões de hectares',
+                descricao: 'Tradicional produtor com alta mecanização.',
+                sustentavel: 'Rotação de culturas avançada'
+            },
+            {
+                lat: -15.7, lng: -47.9, tipo: 'soja',
+                nome: 'Bahia (MATOPIBA)',
+                cor: '#d4a373',
+                producao: '7 milhões de toneladas',
+                area: '2,8 milhões de hectares',
+                descricao: 'Fronteira agrícola em expansão com tecnologia de ponta.',
+                sustentavel: 'Recuperação de pastagens degradadas'
+            },
+
+            // MILHO (verde)
+            {
+                lat: -22.5, lng: -48.5, tipo: 'milho',
+                nome: 'São Paulo',
+                cor: '#40916c',
+                producao: '16 milhões de toneladas',
+                area: '2,2 milhões de hectares',
+                descricao: 'Grande produtor de milho safrinha integrado à soja.',
+                sustentavel: 'Sistema plantio direto consolidado'
+            },
+            {
+                lat: -19.9, lng: -53.5, tipo: 'milho',
+                nome: 'Mato Grosso do Sul',
+                cor: '#40916c',
+                producao: '11 milhões de toneladas',
+                area: '2,5 milhões de hectares',
+                descricao: 'Destaque na produção de milho safrinha.',
+                sustentavel: 'Integração Lavoura-Pecuária-Floresta'
+            },
+            {
+                lat: -25.5, lng: -51.0, tipo: 'milho',
+                nome: 'Rio Grande do Sul',
+                cor: '#40916c',
+                producao: '9 milhões de toneladas',
+                area: '2,1 milhões de hectares',
+                descricao: 'Tradicional produtor com alta tecnologia.',
+                sustentavel: 'Agricultura de precisão em larga escala'
+            },
+
+            // CAFÉ (azul)
+            {
+                lat: -21.0, lng: -45.0, tipo: 'cafe',
+                nome: 'Minas Gerais',
+                cor: '#0077b6',
+                producao: '28 milhões de sacas',
+                area: '1,2 milhão de hectares',
+                descricao: 'Maior produtor de café do Brasil, líder em qualidade.',
+                sustentavel: 'Café sombreado e orgânico em crescimento'
+            },
+            {
+                lat: -20.3, lng: -40.3, tipo: 'cafe',
+                nome: 'Espírito Santo',
+                cor: '#0077b6',
+                producao: '10 milhões de sacas',
+                area: '350 mil hectares',
+                descricao: 'Grande produtor de café Conilon (robusto).',
+                sustentavel: 'Irrigação por gotejamento'
+            },
+            {
+                lat: -22.0, lng: -48.0, tipo: 'cafe',
+                nome: 'São Paulo (Mogiana)',
+                cor: '#0077b6',
+                producao: '7 milhões de sacas',
+                area: '250 mil hectares',
+                descricao: 'Região tradicional com cafés especiais premiados.',
+                sustentavel: 'Certificações ambientais internacionais'
+            },
+
+            // CANA-DE-AÇÚCAR (marrom)
+            {
+                lat: -21.5, lng: -47.8, tipo: 'cana',
+                nome: 'São Paulo (Centro-Sul)',
+                cor: '#bc6c25',
+                producao: '350 milhões de toneladas',
+                area: '5 milhões de hectares',
+                descricao: 'Maior região produtora de cana do mundo.',
+                sustentavel: 'Bioenergia e cogeração elétrica'
+            },
+            {
+                lat: -18.2, lng: -44.0, tipo: 'cana',
+                nome: 'Minas Gerais (Triângulo)',
+                cor: '#bc6c25',
+                producao: '75 milhões de toneladas',
+                area: '1 milhão de hectares',
+                descricao: 'Região em expansão com alta produtividade.',
+                sustentavel: 'Vinhaça reutilizada como fertilizante'
+            },
+            {
+                lat: -8.0, lng: -34.9, tipo: 'cana',
+                nome: 'Pernambuco',
+                cor: '#bc6c25',
+                producao: '20 milhões de toneladas',
+                area: '350 mil hectares',
+                descricao: 'Tradição histórica na produção de cana no Nordeste.',
+                sustentavel: 'Programas de certificação socioambiental'
+            },
+            {
+                lat: -19.0, lng: -48.0, tipo: 'cana',
+                nome: 'Goiás',
+                cor: '#bc6c25',
+                producao: '45 milhões de toneladas',
+                area: '900 mil hectares',
+                descricao: 'Crescimento acelerado na produção de etanol.',
+                sustentavel: 'Biodigestores e energia limpa'
+            }
+        ];
+
+        // Criar ícones customizados
+        function criarIcone(cor) {
+            return L.divIcon({
+                className: 'custom-marker',
+                html: `<div style="
+                    background: ${cor};
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    border: 3px solid white;
+                    box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+                    cursor: pointer;
+                    transition: transform 0.3s ease;
+                "></div>`,
+                iconSize: [20, 20],
+                iconAnchor: [10, 10]
+            });
+        }
+
+        // Adicionar marcadores ao mapa
+        let marcadores = [];
+        let marcadoresLayer = L.layerGroup().addTo(map);
+
+        function adicionarMarcadores(filtro = 'all') {
+            marcadoresLayer.clearLayers();
+            marcadores = [];
+
+            regioesAgricolas.forEach(regiao => {
+                if (filtro === 'all' || regiao.tipo === filtro) {
+                    const marker = L.marker([regiao.lat, regiao.lng], {
+                        icon: criarIcone(regiao.cor)
+                    });
+
+                    // Popup customizado
+                    const popupContent = `
+                        <div class="popup-content">
+                            <span class="popup-type" style="background: ${regiao.cor};">
+                                ${regiao.tipo.toUpperCase()}
+                            </span>
+                            <h3>${regiao.nome}</h3>
+                            <p>${regiao.descricao}</p>
+                            <div class="popup-stat">
+                                <span><i class="fas fa-chart-line"></i> Produção:</span>
+                                <strong>${regiao.producao}</strong>
+                            </div>
+                            <div class="popup-stat">
+                                <span><i class="fas fa-ruler-combined"></i> Área:</span>
+                                <strong>${regiao.area}</strong>
+                            </div>
+                            <div class="popup-stat">
+                                <span><i class="fas fa-leaf"></i> Sustentabilidade:</span>
+                                <strong style="color: #2d6a4f;">${regiao.sustentavel}</strong>
+                            </div>
+                        </div>
+                    `;
+
+                    marker.bindPopup(popupContent, {
+                        maxWidth: 300,
+                        className: 'custom-popup'
+                    });
+
+                    // Efeito hover
+                    marker.on('mouseover', function() {
+                        this.getElement().style.transform = 'scale(1.3)';
+                    });
+                    marker.on('mouseout', function() {
+                        this.getElement().style.transform = 'scale(1)';
+                    });
+
+                    marcadoresLayer.addLayer(marker);
+                    marcadores.push(marker);
+                }
+            });
+        }
+
+        // Inicializar marcadores
+        adicionarMarcadores();
+
+        // Filtros do mapa
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const filtro = this.getAttribute('data-filter');
+                adicionarMarcadores(filtro);
+            });
+        });
+
+        // ================================
+        // CALCULADORA
+        // ================================
         document.getElementById('energia').addEventListener('input', function() {
             document.getElementById('energiaValor').textContent = this.value + '%';
         });
@@ -1814,7 +2088,6 @@
                 return;
             }
 
-            // Cálculo simplificado de impacto
             const baseImpact = hectares * 10 * atividade;
             const energiaReduction = (energia / 100) * 0.4;
             const finalImpact = Math.round(baseImpact * (1 - energiaReduction));
@@ -1822,19 +2095,17 @@
             document.getElementById('resultadoNumero').textContent = finalImpact;
             
             let dica = '';
-            if (finalImpact < 100) {
-                dica = 'Excelente! Sua propriedade tem baixo impacto ambiental. Continue assim!';
-            } else if (finalImpact < 300) {
-                dica = 'Bom início! Considere aumentar o uso de energias renováveis.';
-            } else {
-                dica = 'Que tal investir em agricultura regenerativa e energia solar?';
-            }
+            if (finalImpact < 100) dica = 'Excelente! Sua propriedade tem baixo impacto ambiental. Continue assim!';
+            else if (finalImpact < 300) dica = 'Bom início! Considere aumentar o uso de energias renováveis.';
+            else dica = 'Que tal investir em agricultura regenerativa e energia solar?';
             
             document.getElementById('resultadoDica').textContent = dica;
             document.getElementById('resultado').classList.add('show');
         }
 
-        // Quiz
+        // ================================
+        // QUIZ
+        // ================================
         const questions = [
             {
                 question: "Qual prática agrícola ajuda a conservar o solo?",
@@ -1890,19 +2161,14 @@
             const correct = questions[currentQuestion].correct;
             
             options[selected].classList.add(selected === correct ? 'correct' : 'incorrect');
-            if (selected !== correct) {
-                options[correct].classList.add('correct');
-            }
+            if (selected !== correct) options[correct].classList.add('correct');
             
             if (selected === correct) score++;
             
             setTimeout(() => {
                 currentQuestion++;
-                if (currentQuestion < questions.length) {
-                    loadQuestion();
-                } else {
-                    showResult();
-                }
+                if (currentQuestion < questions.length) loadQuestion();
+                else showResult();
             }, 1500);
         }
 
@@ -1952,16 +2218,18 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
 
         // Inicializar quiz
         loadQuestion();
+
+        // Forçar redimensionamento do mapa após carregar
+        setTimeout(() => {
+            map.invalidateSize();
+        }, 500);
     </script>
 </body>
 </html>
