@@ -1,704 +1,844 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Agro Forte - Futuro Sustentável</title>
-
+    <title>Projeto Agrinho - Conscientização Ambiental</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-
-        /* =========================
-           RESET
-        ========================== */
-        *{
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* =========================
-           PALETA DE CORES
-        ========================== */
-        :root{
-
-            /* Pantone 7740 C */
-            --verde: #3D5A2A;
-
-            /* Verde escuro */
-            --verde-escuro: #24361A;
-
-            /* Pantone 110 C */
-            --dourado: #D9A404;
-
-            /* Pantone 732 C */
-            --marrom: #6B3E26;
-
-            /* Pantone 2411 C */
-            --roxo: #5F4B8B;
-
-            --branco: #ffffff;
-            --cinza: #f4f4f4;
+        :root {
+            --primary-green: #2d5016;
+            --secondary-green: #4a7c2e;
+            --light-green: #7cb342;
+            --accent-green: #a5d6a7;
+            --earth-brown: #5d4037;
+            --cream: #f5f5dc;
+            --dark: #1a1a1a;
+            --white: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
         }
 
-        /* =========================
-           BODY
-        ========================== */
-        body{
-            font-family: Arial, Helvetica, sans-serif;
-            background-color: var(--cinza);
-            color: #222;
-            line-height: 1.6;
+        html {
+            scroll-behavior: smooth;
         }
 
-        /* =========================
-           CABEÇALHO
-        ========================== */
-        .header{
-            background-color: var(--verde-escuro);
-            color: white;
+        body {
+            font-family: 'Merriweather', serif;
+            line-height: 1.8;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
 
+        /* HEADER & NAVEGAÇÃO */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(45, 80, 22, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px var(--shadow);
+        }
+
+        header.scrolled {
+            background: rgba(45, 80, 22, 0.98);
+            padding: 0.5rem 0;
+        }
+
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-
-            padding: 20px 50px;
-
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
         }
 
-        .header h1{
-            color: var(--dourado);
-        }
-
-        /* =========================
-           MENU
-        ========================== */
-        .menu{
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--white);
             display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-
-        .menu a{
-            color: white;
-            text-decoration: none;
-            transition: 0.3s;
-            font-weight: bold;
-        }
-
-        .menu a:hover{
-            color: var(--dourado);
-        }
-
-        /* =========================
-           BANNER
-        ========================== */
-        .banner{
-
-            height: 90vh;
-
-            background:
-            linear-gradient(rgba(0,0,0,0.5),
-            rgba(0,0,0,0.5)),
-
-            url("https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1400");
-
-            background-size: cover;
-            background-position: center;
-
-            display: flex;
-            justify-content: center;
             align-items: center;
-
-            text-align: center;
-            color: white;
+            gap: 0.5rem;
         }
 
-        .banner-texto{
-            max-width: 700px;
-            padding: 20px;
-        }
-
-        .banner h2{
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        .banner p{
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-        }
-
-        /* =========================
-           BOTÕES
-        ========================== */
-        button{
-
-            background-color: var(--dourado);
-            color: black;
-
-            border: none;
-
-            padding: 14px 28px;
-
-            border-radius: 8px;
-
-            cursor: pointer;
-
-            font-size: 1rem;
-            font-weight: bold;
-
-            transition: 0.3s;
-        }
-
-        button:hover{
-            background-color: var(--roxo);
-            color: white;
-            transform: scale(1.05);
-        }
-
-        /* =========================
-           SEÇÕES
-        ========================== */
-        .secao{
-            padding: 80px 10%;
-        }
-
-        .secao h2{
-            color: var(--verde);
-            margin-bottom: 20px;
+        .logo i {
+            color: var(--accent-green);
             font-size: 2rem;
         }
 
-        .destaque{
-            background-color: white;
-        }
-
-        /* =========================
-           CARDS
-        ========================== */
-        .cards{
-
+        .nav-links {
             display: flex;
-            gap: 20px;
-
-            flex-wrap: wrap;
-
-            margin-top: 30px;
+            list-style: none;
+            gap: 2rem;
         }
 
-        .card{
-
-            background-color: white;
-
-            flex: 1;
-            min-width: 250px;
-
-            padding: 25px;
-
-            border-radius: 10px;
-
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-
-            transition: 0.3s;
-        }
-
-        .card:hover{
-            transform: translateY(-8px);
-        }
-
-        .card h3{
-            color: var(--marrom);
-            margin-bottom: 10px;
-        }
-
-        /* =========================
-           LISTA
-        ========================== */
-        ul{
-            margin-left: 20px;
-            margin-top: 20px;
-        }
-
-        /* =========================
-           FORMULÁRIO
-        ========================== */
-        form{
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-
-            margin-top: 30px;
-        }
-
-        input,
-        textarea{
-
-            padding: 12px;
-
-            border-radius: 6px;
-            border: 1px solid #ccc;
-
-            font-size: 1rem;
-        }
-
-        textarea{
-            resize: none;
-            height: 120px;
-        }
-
-        /* =========================
-           RODAPÉ
-        ========================== */
-        .footer{
-
-            background-color: var(--verde-escuro);
-
-            color: white;
-
-            text-align: center;
-
-            padding: 20px;
-        }
-
-        /* =========================
-           MODAL
-        ========================== */
-        .modal{
-
-            display: none;
-
-            position: fixed;
-
-            top: 0;
-            left: 0;
-
-            width: 100%;
-            height: 100%;
-
-            background-color: rgba(0,0,0,0.7);
-
-            justify-content: center;
-            align-items: center;
-
-            z-index: 2000;
-        }
-
-        .modal-conteudo{
-
-            background-color: white;
-
-            width: 80%;
-            max-width: 700px;
-
-            padding: 30px;
-
-            border-radius: 10px;
-
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
             position: relative;
-
-            animation: aparecer 0.4s ease;
         }
 
-        /* Animação */
-        @keyframes aparecer{
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-green);
+            transition: width 0.3s ease;
+        }
 
-            from{
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(45, 80, 22, 0.8), rgba(26, 26, 26, 0.6)),
+                        url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=1920') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--light-green);
+            color: var(--white);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(124, 178, 66, 0.4);
+        }
+
+        .cta-button:hover {
+            background: var(--secondary-green);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(124, 178, 66, 0.6);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator i {
+            font-size: 2rem;
+            color: var(--white);
+        }
+
+        /* SEÇÕES */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--light-green);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* SOBRE O PROBLEMA */
+        .problem-section {
+            background: var(--cream);
+        }
+
+        .problem-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .problem-text {
+            font-size: 1.1rem;
+            line-height: 2;
+        }
+
+        .problem-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .problem-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .problem-image:hover {
+            transform: scale(1.02);
+        }
+
+        .problem-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ESTATÍSTICAS */
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: var(--white);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .stat-card i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-green);
+        }
+
+        .stat-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* GRÁFICO */
+        .chart-section {
+            background: var(--white);
+        }
+
+        .chart-container {
+            background: var(--cream);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 30px var(--shadow);
+            margin-top: 2rem;
+        }
+
+        .chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 300px;
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: linear-gradient(to top, var(--primary-green), var(--light-green));
+            border-radius: 10px 10px 0 0;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .chart-bar:hover {
+            transform: scaleY(1.05);
+            box-shadow: 0 -5px 20px rgba(124, 178, 66, 0.4);
+        }
+
+        .chart-bar::after {
+            content: attr(data-value);
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--primary-green);
+            font-size: 0.9rem;
+        }
+
+        .chart-label {
+            text-align: center;
+            margin-top: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: var(--earth-brown);
+        }
+
+        /* SOLUÇÕES */
+        .solutions-section {
+            background: var(--cream);
+        }
+
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .solution-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px var(--shadow);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--light-green);
+        }
+
+        .solution-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px var(--shadow);
+        }
+
+        .solution-card i {
+            font-size: 2.5rem;
+            color: var(--secondary-green);
+            margin-bottom: 1rem;
+        }
+
+        .solution-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .solution-card p {
+            line-height: 1.8;
+        }
+
+        /* AÇÃO */
+        .action-section {
+            background: linear-gradient(135deg, var(--earth-brown), var(--primary-green));
+            color: var(--white);
+            text-align: center;
+        }
+
+        .action-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .action-content h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .action-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .donate-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--light-green);
+            color: var(--white);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .donate-button:hover {
+            background: var(--accent-green);
+            color: var(--primary-green);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--light-green);
+            transform: translateY(-3px);
+        }
+
+        .footer-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* ANIMAÇÕES */
+        @keyframes fadeInUp {
+            from {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: translateY(30px);
             }
-
-            to{
+            to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        .modal-conteudo h2{
-            color: var(--verde);
-            margin-bottom: 20px;
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-15px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-7px);
+            }
         }
 
-        .modal-conteudo h3{
-            margin-top: 20px;
-            color: var(--marrom);
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
         }
 
-        .modal-conteudo ul{
-            margin-top: 15px;
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        /* BOTÃO FECHAR */
-        #fechar{
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
 
-            position: absolute;
-
-            top: 10px;
-            right: 20px;
-
-            font-size: 30px;
-
-            cursor: pointer;
-        }
-
-        /* =========================
-           RESPONSIVIDADE
-        ========================== */
-        @media(max-width: 768px){
-
-            .header{
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
                 flex-direction: column;
-                gap: 20px;
+                background: var(--primary-green);
+                width: 100%;
+                padding: 2rem;
+                transition: right 0.3s ease;
+                box-shadow: 0 5px 20px var(--shadow);
             }
 
-            .menu{
-                flex-wrap: wrap;
-                justify-content: center;
+            .nav-links.active {
+                right: 0;
             }
 
-            .banner h2{
+            .hero h1 {
                 font-size: 2rem;
             }
 
-            .cards{
-                flex-direction: column;
+            .hero p {
+                font-size: 1rem;
             }
 
-        }
+            .problem-content {
+                grid-template-columns: 1fr;
+            }
 
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chart {
+                height: 200px;
+            }
+        }
     </style>
 </head>
-
 <body>
-
-    <!-- =========================
-         CABEÇALHO
-    ========================== -->
-    <header class="header">
-
-        <h1>🌱 Agro Forte</h1>
-
+    <!-- HEADER -->
+    <header id="header">
         <nav>
-            <ul class="menu">
-
-                <li><a href="#producao">Produção</a></li>
-
-                <li><a href="#sustentabilidade">Sustentabilidade</a></li>
-
-                <li><a href="#desafios">Desafios</a></li>
-
-                <li><a href="#futuro">Futuro</a></li>
-
-                <li><a href="#contato">Contato</a></li>
-
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                <span>Projeto Agrinho</span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#problema">O Problema</a></li>
+                <li><a href="#estatisticas">Estatísticas</a></li>
+                <li><a href="#solucoes">Soluções</a></li>
+                <li><a href="#acao">Como Ajudar</a></li>
             </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </nav>
-
     </header>
 
-    <!-- =========================
-         BANNER
-    ========================== -->
-    <section class="banner">
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Preservar a Amazônia é Preservar o Futuro</h1>
+            <p>Juntos podemos fazer a diferença na conscientização ambiental e na proteção dos nossos recursos naturais</p>
+            <a href="#problema" class="cta-button">Saiba Mais</a>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
 
-        <div class="banner-texto">
+    <!-- O PROBLEMA -->
+    <section class="problem-section" id="problema">
+        <h2 class="section-title fade-in">O Problema do Desmatamento</h2>
+        <div class="problem-content">
+            <div class="problem-text fade-in">
+                <p>No último ano, o desmatamento na Amazônia se tornou cada vez mais recorrente, e o problema está cada vez mais visível, não só para nós brasileiros, mas também para outras nações.</p>
+                <p>A Amazônia registrou o maior índice de desmatamento nos últimos anos, e mesmo com os números sendo alarmantes, são poucos os projetos para informar as pessoas e ajudar a floresta antes que seja tarde demais.</p>
+                <p>Desde as gerações nômades, o ser humano busca aproveitar ao máximo o que a natureza oferece. Porém, é necessário lembrar que os <strong>recursos naturais são finitos</strong>.</p>
+                <p>Hoje em dia, ainda não estamos em crise, mas com o crescimento do desmatamento, estaremos em um futuro não tão distante. Precisa-se aprender a utilizar esses recursos com responsabilidade, e para isso precisamos de <strong>conscientização</strong>.</p>
+            </div>
+            <div class="problem-image fade-in">
+                <img src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=800" alt="Floresta Amazônica">
+            </div>
+        </div>
+    </section>
 
-            <h2>
-                Agro forte, futuro sustentável
-            </h2>
+    <!-- ESTATÍSTICAS -->
+    <section class="stats-section" id="estatisticas">
+        <h2 class="section-title fade-in" style="color: white;">Números Alarmantes</h2>
+        <div class="stats-grid">
+            <div class="stat-card fade-in">
+                <i class="fas fa-tree"></i>
+                <h3>10.000+</h3>
+                <p>km² desmatados por ano na Amazônia</p>
+            </div>
+            <div class="stat-card fade-in">
+                <i class="fas fa-fire"></i>
+                <h3>80.000+</h3>
+                <p>focos de incêndio registrados anualmente</p>
+            </div>
+            <div class="stat-card fade-in">
+                <i class="fas fa-paw"></i>
+                <h3>300+</h3>
+                <p>espécies ameaçadas de extinção</p>
+            </div>
+            <div class="stat-card fade-in">
+                <i class="fas fa-globe-americas"></i>
+                <h3>20%</h3>
+                <p>da floresta já foi destruída</p>
+            </div>
+        </div>
+    </section>
 
-            <p>
-                Tecnologia, inovação e preservação ambiental
-                caminhando juntas para um futuro melhor.
+    <!-- GRÁFICO -->
+    <section class="chart-section">
+        <h2 class="section-title fade-in">Crescimento do Desmatamento</h2>
+        <p style="text-align: center; margin-bottom: 2rem; font-size: 1.1rem;" class="fade-in">
+            O gráfico abaixo mostra o aumento preocupante das áreas desmatadas nos últimos anos
+        </p>
+        <div class="chart-container fade-in">
+            <div class="chart">
+                <div>
+                    <div class="chart-bar" style="height: 40%;" data-value="4.500 km²"></div>
+                    <div class="chart-label">2018</div>
+                </div>
+                <div>
+                    <div class="chart-bar" style="height: 55%;" data-value="6.200 km²"></div>
+                    <div class="chart-label">2019</div>
+                </div>
+                <div>
+                    <div class="chart-bar" style="height: 70%;" data-value="8.500 km²"></div>
+                    <div class="chart-label">2020</div>
+                </div>
+                <div>
+                    <div class="chart-bar" style="height: 85%;" data-value="10.800 km²"></div>
+                    <div class="chart-label">2021</div>
+                </div>
+                <div>
+                    <div class="chart-bar" style="height: 95%;" data-value="13.200 km²"></div>
+                    <div class="chart-label">2022</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLUÇÕES -->
+    <section class="solutions-section" id="solucoes">
+        <h2 class="section-title fade-in">O Que Podemos Fazer?</h2>
+        <div class="solutions-grid">
+            <div class="solution-card fade-in">
+                <i class="fas fa-bullhorn"></i>
+                <h3>Conscientização</h3>
+                <p>Informar a população sobre o que está acontecendo ao redor é o primeiro passo para a mudança. Quanto mais pessoas cientes, mais ajuda teremos.</p>
+            </div>
+            <div class="solution-card fade-in">
+                <i class="fas fa-hand-holding-heart"></i>
+                <h3>Doações</h3>
+                <p>Instituições sérias trabalham diretamente na preservação da Amazônia. Suas doações ajudam a financiar projetos de proteção e reflorestamento.</p>
+            </div>
+            <div class="solution-card fade-in">
+                <i class="fas fa-recycle"></i>
+                <h3>Vida Sustentável</h3>
+                <p>Pequenas mudanças no dia a dia fazem grande diferença: reduzir consumo, reciclar, economizar água e energia são atitudes que ajudam o planeta.</p>
+            </div>
+            <div class="solution-card fade-in">
+                <i class="fas fa-landmark"></i>
+                <h3>Projetos Governamentais</h3>
+                <p>Projetos do governo e de empresas privadas são necessários para criar políticas de preservação eficazes e fiscalizar o desmatamento ilegal.</p>
+            </div>
+            <div class="solution-card fade-in">
+                <i class="fas fa-users"></i>
+                <h3>Ação Coletiva</h3>
+                <p>Um único indivíduo pode parecer pequeno, mas juntos somos fortes. Participe de movimentos ambientais e incentive outras pessoas a fazer o mesmo.</p>
+            </div>
+            <div class="solution-card fade-in">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>Educação Ambiental</h3>
+                <p>Ensinar as novas gerações sobre sustentabilidade é fundamental para garantir que nossos recursos naturais estejam disponíveis no futuro.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- AÇÃO -->
+    <section class="action-section" id="acao">
+        <div class="action-content fade-in">
+            <h2>Ajude a Salvar a Amazônia</h2>
+            <p>Sustentabilidade é sobre saber usar o que o mundo nos oferece, de maneira responsável, para que as próximas gerações possam ter acesso aos recursos também. Cada ação conta, cada contribuição importa.</p>
+            <a href="https://doe.greenpeace.org.br/salve-a-amazonia/" target="_blank" class="donate-button">
+                <i class="fas fa-heart"></i> Fazer uma Doação
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p class="footer-text">
+                © 2024 Projeto Agrinho - Conscientização Ambiental. Todos os direitos reservados.<br>
+                Juntos podemos fazer a diferença! 🌱
             </p>
-
-            <!-- BOTÃO INTERATIVO -->
-            <button id="btnSaibaMais">
-                Saiba Mais
-            </button>
-
         </div>
-
-    </section>
-
-    <!-- =========================
-         PRODUÇÃO AGRÍCOLA
-    ========================== -->
-    <section id="producao" class="secao">
-
-        <h2>🌾 Produção Agrícola</h2>
-
-        <p>
-            O agronegócio é um dos pilares da economia brasileira,
-            responsável por exportações, empregos e abastecimento alimentar.
-        </p>
-
-        <div class="cards">
-
-            <div class="card">
-
-                <h3>Agricultura de Precisão</h3>
-
-                <p>
-                    Uso de GPS, sensores e dados digitais
-                    para reduzir desperdícios.
-                </p>
-
-            </div>
-
-            <div class="card">
-
-                <h3>Drones Agrícolas</h3>
-
-                <p>
-                    Monitoramento inteligente das plantações
-                    e análise do solo.
-                </p>
-
-            </div>
-
-            <div class="card">
-
-                <h3>Irrigação Inteligente</h3>
-
-                <p>
-                    Economia de água através de sistemas automatizados.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- =========================
-         SUSTENTABILIDADE
-    ========================== -->
-    <section id="sustentabilidade" class="secao destaque">
-
-        <h2>♻️ Sustentabilidade no Campo</h2>
-
-        <p>
-            A sustentabilidade garante equilíbrio entre
-            produção agrícola e preservação ambiental.
-        </p>
-
-        <ul>
-
-            <li>Conservação do solo</li>
-
-            <li>Redução do desperdício de água</li>
-
-            <li>Uso de energias renováveis</li>
-
-            <li>Menor emissão de carbono</li>
-
-        </ul>
-
-    </section>
-
-    <!-- =========================
-         DESAFIOS
-    ========================== -->
-    <section id="desafios" class="secao">
-
-        <h2>⚠️ Desafios Ambientais</h2>
-
-        <div class="cards">
-
-            <div class="card">
-
-                <h3>Desmatamento</h3>
-
-                <p>
-                    Pode causar perda da biodiversidade
-                    e alterações climáticas.
-                </p>
-
-            </div>
-
-            <div class="card">
-
-                <h3>Uso excessivo da água</h3>
-
-                <p>
-                    Impacta rios, aquíferos e recursos naturais.
-                </p>
-
-            </div>
-
-            <div class="card">
-
-                <h3>Emissão de carbono</h3>
-
-                <p>
-                    Máquinas e queimadas contribuem para
-                    o aquecimento global.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- =========================
-         FUTURO
-    ========================== -->
-    <section id="futuro" class="secao destaque">
-
-        <h2>🚜 Soluções e Futuro</h2>
-
-        <p>
-            A agricultura regenerativa e as novas tecnologias
-            podem transformar o futuro do agronegócio.
-        </p>
-
-        <button>
-            Conhecer Inovações
-        </button>
-
-    </section>
-
-    <!-- =========================
-         CONTATO
-    ========================== -->
-    <section id="contato" class="secao">
-
-        <h2>📩 Conscientização</h2>
-
-        <p>
-            Pequenas ações no presente ajudam a construir
-            um futuro sustentável.
-        </p>
-
-        <form>
-
-            <input type="text" placeholder="Seu nome">
-
-            <input type="email" placeholder="Seu e-mail">
-
-            <textarea placeholder="Digite sua mensagem"></textarea>
-
-            <button type="submit">
-                Enviar
-            </button>
-
-        </form>
-
-    </section>
-
-    <!-- =========================
-         RODAPÉ
-    ========================== -->
-    <footer class="footer">
-
-        <p>
-            © 2026 - Agro Forte | Educação e Sustentabilidade
-        </p>
-
     </footer>
 
-    <!-- =========================
-         MODAL INTERATIVO
-    ========================== -->
-    <div id="modal" class="modal">
-
-        <div class="modal-conteudo">
-
-            <!-- FECHAR -->
-            <span id="fechar">&times;</span>
-
-            <h2>
-                Impactos do Agronegócio Brasileiro
-            </h2>
-
-            <ul>
-
-                <li>
-                    O agronegócio representa grande parcela do PIB brasileiro.
-                </li>
-
-                <li>
-                    O uso de tecnologia aumenta a produtividade no campo.
-                </li>
-
-                <li>
-                    A irrigação inteligente reduz desperdícios de água.
-                </li>
-
-                <li>
-                    Drones auxiliam no monitoramento sustentável.
-                </li>
-
-                <li>
-                    O desmatamento ainda é um desafio ambiental importante.
-                </li>
-
-                <li>
-                    Energias renováveis ajudam na redução de carbono.
-                </li>
-
-                <li>
-                    A agricultura regenerativa surge como solução futura.
-                </li>
-
-            </ul>
-
-            <h3>Fontes confiáveis:</h3>
-
-            <p>
-                EMBRAPA, Ministério da Agricultura, FAO e IPCC 2024.
-            </p>
-
-        </div>
-
-    </div>
-
-    <!-- =========================
-         JAVASCRIPT
-    ========================== -->
     <script>
+        // Menu Mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
 
-        // BOTÃO
-        const botao = document.getElementById("btnSaibaMais");
-
-        // MODAL
-        const modal = document.getElementById("modal");
-
-        // FECHAR
-        const fechar = document.getElementById("fechar");
-
-        // ABRIR MODAL
-        botao.addEventListener("click", () => {
-
-            modal.style.display = "flex";
-
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
         });
 
-        // FECHAR MODAL
-        fechar.addEventListener("click", () => {
-
-            modal.style.display = "none";
-
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
         });
 
-        // FECHAR AO CLICAR FORA
-        window.addEventListener("click", (event) => {
-
-            if(event.target === modal){
-
-                modal.style.display = "none";
-
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
             }
-
         });
 
-    </script>
+        // Animação de fade-in ao scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Animação dos números nas estatísticas
+        const animateCounter = (element, target) => {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target.toLocaleString('pt-BR') + (element.dataset.suffix || '');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString('pt-BR');
+                }
+            }, 30);
+        };
+
+        // Observar elementos de estatística
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const number = entry.target.querySelector('h3');
+                    const text = number.textContent;
+                    const value = parseInt(text.replace(/\D/g, ''));
+                    const suffix = text.replace(/[\d.,]/g, '');
+                    number.dataset.suffix = suffix;
+                    animateCounter(number, value);
+                    statObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-card').forEach(card => {
+            statObserver.observe(card);
+        });
+
+        // Smooth scroll para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Efeito parallax no hero
+        window.addEventListener('scroll', () => {
+            const hero = document.querySelector('.hero');
+            const scrolled = window.pageYOffset;
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+
+        // Console message
+        console.log('%c🌱 Projeto Agrinho - Juntos pela preservação da Amazônia!', 
+            'color: #4a7c2e; font-size: 20px; font-weight: bold;');
+    </script>
 </body>
 </html>
